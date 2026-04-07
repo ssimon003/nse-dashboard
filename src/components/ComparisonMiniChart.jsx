@@ -10,9 +10,9 @@ export default function ComparisonMiniChart({ theme, filters }) {
   ]
 
   return (
-    <div className="bg-surface-container-low rounded-xl p-6 flex flex-col gap-4">
+    <div className="bg-surface-container-low rounded-xl p-4 md:p-6 flex flex-col gap-4">
       <div className="flex justify-between items-center">
-        <h3 className="text-lg font-bold font-headline text-primary">Studievorm</h3>
+        <h3 className="text-base md:text-lg font-bold font-headline text-primary">Studievorm</h3>
         <span className="material-symbols-outlined text-outline text-xl">compare_arrows</span>
       </div>
       <div className="flex flex-col gap-3">

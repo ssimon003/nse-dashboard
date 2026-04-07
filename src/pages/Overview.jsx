@@ -39,16 +39,16 @@ export default function Overview() {
   }
 
   return (
-    <main className="max-w-[1280px] mx-auto px-8 py-10 flex flex-col gap-10">
+    <main className="max-w-[1280px] mx-auto px-4 py-6 md:px-8 md:py-10 flex flex-col gap-6 md:gap-10">
       {/* Page title only — no subtitle */}
-      <h1 className="text-5xl font-extrabold font-headline tracking-tight text-primary">
+      <h1 className="text-3xl md:text-5xl font-extrabold font-headline tracking-tight text-primary">
         Thematisch Landschap
       </h1>
 
       {/* Dashboard grid */}
-      <div className="grid grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-start">
         {/* Left/center */}
-        <div className="col-span-8 flex flex-col gap-10">
+        <div className="order-2 md:order-1 col-span-1 md:col-span-8 flex flex-col gap-6 md:gap-10">
 
           {/* Theme Landscape */}
           <section>
@@ -75,7 +75,7 @@ export default function Overview() {
               </div>
             </div>
 
-            <div className="grid grid-cols-4 grid-rows-3 gap-3 h-[460px]">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:grid-rows-3 md:h-[460px]">
               {BENTO_LAYOUT.map(({ id, size }) => {
                 const theme = themes.find((t) => t.id === id)
                 if (!theme) return null
@@ -99,14 +99,14 @@ export default function Overview() {
           </section>
 
           {/* Charts row */}
-          <section className="grid grid-cols-2 gap-6">
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <TrendChart activeTheme={activeTheme} allThemes={themes} />
             <ComparisonMiniChart theme={activeTheme ?? themes[0]} filters={filters} />
           </section>
         </div>
 
         {/* Right sidebar */}
-        <aside className="col-span-4 flex flex-col gap-5 sticky top-20">
+        <aside className="order-1 md:order-2 col-span-1 md:col-span-4 flex flex-col gap-5 md:sticky md:top-20">
 
           {/* Filters */}
           <div className="bg-surface-container-lowest/85 glass-panel shadow-editorial rounded-2xl p-5 flex flex-col gap-3">

@@ -71,12 +71,51 @@ export default function Vergelijken() {
   )
 
   return (
-    <main className="flex min-h-screen">
+    <main className="max-w-[1280px] mx-auto">
+      <div className="flex flex-col md:flex-row min-h-screen">
+      {/* Sidebar - right on desktop, top on mobile */}
+      <aside className="w-full md:w-72 md:fixed md:right-0 md:top-16 md:h-[calc(100vh-4rem)] bg-surface-container-lowest/85 glass-panel shadow-editorial flex flex-col p-5 gap-4 order-first md:order-last overflow-y-auto">
+        <div>
+          <h3 className="text-xs font-bold uppercase tracking-widest text-primary mb-1">Filters</h3>
+          <p className="text-xs text-on-surface-variant">Verfijn uw inzichten</p>
+        </div>
+        {[
+          { icon: 'calendar_today', label: 'Academisch Jaar' },
+          { icon: 'location_on', label: 'Locatie' },
+          { icon: 'school', label: 'Opleiding' },
+          { icon: 'history_edu', label: 'Studievorm' },
+          { icon: 'group', label: 'Cohort' },
+        ].map((f, i) => (
+          <button
+            key={f.label}
+            className={`w-full flex items-center gap-3 p-3 text-sm font-medium rounded-xl transition-colors text-left ${
+              i === 0
+                ? 'bg-surface-container-low text-primary'
+                : 'text-on-surface-variant hover:bg-surface-container-low'
+            }`}
+          >
+            <span className="material-symbols-outlined text-lg">{f.icon}</span>
+            <span>{f.label}</span>
+          </button>
+        ))}
+
+        <div className="mt-auto bg-surface-container-low p-4 rounded-xl">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs font-bold text-on-surface-variant uppercase">Data Bron</span>
+            <span className="material-symbols-outlined text-sm text-outline">info</span>
+          </div>
+          <p className="text-[10px] text-on-surface-variant leading-relaxed">
+            De resultaten zijn gebaseerd op de Nationale Studenten Enquête (NSE) resultaten van
+            Fontys Hogescholen.
+          </p>
+        </div>
+      </aside>
+
       {/* Main content */}
-      <section className="flex-1 p-12 bg-surface">
+      <section className="flex-1 p-5 md:p-12 bg-surface md:mr-72">
         {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-4xl font-extrabold tracking-tight font-headline text-primary mb-2">
+        <div className="mb-8 md:mb-16">
+          <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight font-headline text-primary mb-2">
             Vergelijkende Analyse
           </h1>
           <p className="text-on-surface-variant max-w-2xl font-body">
@@ -86,8 +125,8 @@ export default function Vergelijken() {
         </div>
 
         {/* Comparison selector */}
-        <div className="grid grid-cols-11 gap-4 mb-10 items-center">
-          <div className="col-span-5 bg-surface-container-lowest p-5 rounded-xl shadow-editorial">
+        <div className="grid grid-cols-1 md:grid-cols-11 gap-3 md:gap-4 mb-8 md:mb-12 items-center">
+          <div className="md:col-span-5 bg-surface-container-lowest p-5 rounded-xl shadow-editorial">
             <label className="text-[10px] uppercase font-bold text-secondary mb-2 block">
               Selectie A
             </label>
@@ -105,7 +144,7 @@ export default function Vergelijken() {
             <p className="text-sm text-on-surface-variant mt-1">{progA?.year}</p>
           </div>
 
-          <div className="col-span-1 flex justify-center">
+          <div className="md:col-span-1 flex justify-center">
             <div
               className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm text-white"
               style={{ background: 'linear-gradient(135deg, #002F59, #00467F)' }}
@@ -114,7 +153,7 @@ export default function Vergelijken() {
             </div>
           </div>
 
-          <div className="col-span-5 bg-surface-container-lowest p-5 rounded-xl shadow-editorial text-right">
+          <div className="md:col-span-5 md:text-right bg-surface-container-lowest p-5 rounded-xl shadow-editorial">
             <label className="text-[10px] uppercase font-bold text-secondary mb-2 block">
               Selectie B
             </label>
@@ -134,7 +173,7 @@ export default function Vergelijken() {
         </div>
 
         {/* Mirrored chart */}
-        <div className="bg-surface-container-low rounded-2xl p-8">
+        <div className="bg-surface-container-low rounded-2xl p-4 md:p-10">
           {/* Chart header */}
           <div className="flex justify-between items-center mb-8 border-b border-outline-variant/10 pb-5">
             <div className="flex items-center gap-2">
@@ -172,7 +211,7 @@ export default function Vergelijken() {
         </div>
 
         {/* Analysis cards */}
-        <div className="mt-10 grid grid-cols-2 gap-6">
+        <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-editorial">
             <div className="flex items-center gap-3 mb-4">
               <span className="material-symbols-outlined text-tertiary-container">trending_up</span>
@@ -218,44 +257,7 @@ export default function Vergelijken() {
           © 2025 Fontys Hogescholen - NSE Inzichten Dashboard. Alle rechten voorbehouden.
         </footer>
       </section>
-
-      {/* Right sidebar filters */}
-      <aside className="w-72 bg-surface-container-lowest/85 glass-panel shadow-editorial flex flex-col p-6 gap-5 sticky top-16 h-screen">
-        <div>
-          <h3 className="text-xs font-bold uppercase tracking-widest text-primary mb-1">Filters</h3>
-          <p className="text-xs text-on-surface-variant">Verfijn uw inzichten</p>
-        </div>
-        {[
-          { icon: 'calendar_today', label: 'Academisch Jaar' },
-          { icon: 'location_on', label: 'Locatie' },
-          { icon: 'school', label: 'Opleiding' },
-          { icon: 'history_edu', label: 'Studievorm' },
-          { icon: 'group', label: 'Cohort' },
-        ].map((f, i) => (
-          <button
-            key={f.label}
-            className={`w-full flex items-center gap-3 p-3 text-sm font-medium rounded-xl transition-colors text-left ${
-              i === 0
-                ? 'bg-surface-container-low text-primary'
-                : 'text-on-surface-variant hover:bg-surface-container-low'
-            }`}
-          >
-            <span className="material-symbols-outlined text-lg">{f.icon}</span>
-            <span>{f.label}</span>
-          </button>
-        ))}
-
-        <div className="mt-auto bg-surface-container-low p-4 rounded-xl">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-on-surface-variant uppercase">Data Bron</span>
-            <span className="material-symbols-outlined text-sm text-outline">info</span>
-          </div>
-          <p className="text-[10px] text-on-surface-variant leading-relaxed">
-            De resultaten zijn gebaseerd op de Nationale Studenten Enquête (NSE) resultaten van
-            Fontys Hogescholen.
-          </p>
-        </div>
-      </aside>
+      </div>
     </main>
   )
 }

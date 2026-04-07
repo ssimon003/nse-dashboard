@@ -77,7 +77,7 @@ export default function DetailDrawer({ theme, onClose }) {
     >
       {/* Header */}
       <div
-        className="p-6 text-white relative"
+        className="p-4 md:p-6 text-white relative"
         style={{ background: 'linear-gradient(135deg, #002F59 0%, #00467F 100%)' }}
       >
         <div className="flex justify-between items-start mb-4">
@@ -109,7 +109,7 @@ export default function DetailDrawer({ theme, onClose }) {
       </div>
 
       {/* Body */}
-      <div className="p-6 space-y-5">
+      <div className="p-4 md:p-6 space-y-5">
         {/* AI Summary */}
         <div>
           <div className="flex items-center gap-2 mb-2">

@@ -26,27 +26,22 @@ function DonutChart({ breakdown, score }) {
   })
 
   return (
-    <div className="relative" style={{ width: size, height: size }}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="-rotate-90">
-        <circle cx={cx} cy={cy} r={r} fill="transparent" stroke="#e7e8e9" strokeWidth="10" />
-        {arcs.map((arc, i) => (
-          <circle
-            key={i}
-            cx={cx}
-            cy={cy}
-            r={r}
-            fill="transparent"
-            stroke={arc.color}
-            strokeWidth="10"
-            strokeDasharray={`${arc.dash} ${circumference - arc.dash}`}
-            strokeDashoffset={-arc.offset}
-          />
-        ))}
-      </svg>
-      <span className="absolute inset-0 flex items-center justify-center text-xl font-bold text-on-surface">
-        {score}%
-      </span>
-    </div>
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="-rotate-90">
+      <circle cx={cx} cy={cy} r={r} fill="transparent" stroke="#e7e8e9" strokeWidth="10" />
+      {arcs.map((arc, i) => (
+        <circle
+          key={i}
+          cx={cx}
+          cy={cy}
+          r={r}
+          fill="transparent"
+          stroke={arc.color}
+          strokeWidth="10"
+          strokeDasharray={`${arc.dash} ${circumference - arc.dash}`}
+          strokeDashoffset={-arc.offset}
+        />
+      ))}
+    </svg>
   )
 }
 
@@ -84,7 +79,7 @@ function OpleidingBars({ themeId }) {
     <div className="space-y-3">
       {rows.map(({ opl, score }) => (
         <div key={opl} className="flex items-center gap-3">
-          <span className="text-xs text-on-surface-variant w-40 shrink-0 truncate">{opl}</span>
+          <span className="text-xs text-on-surface-variant w-28 md:w-40 shrink-0 truncate">{opl}</span>
           <div className="flex-1 bg-surface-container rounded-full h-2 overflow-hidden">
             <div
               className="h-full rounded-full transition-all duration-500"
@@ -118,7 +113,7 @@ function SubThemeBars({ subthemes }) {
     <div className="space-y-2">
       {subthemes.map((st, i) => (
         <div key={st} className="flex items-center gap-3">
-          <span className="text-xs text-on-surface-variant w-36 shrink-0">{st}</span>
+          <span className="text-xs text-on-surface-variant w-24 md:w-36 shrink-0">{st}</span>
           <div className="flex-1 bg-surface-container rounded-full h-1.5 overflow-hidden">
             <div
               className="h-full rounded-full bg-primary/50"
@@ -184,7 +179,7 @@ export default function ThemeDetail() {
 
   if (!theme) {
     return (
-      <div className="max-w-[1280px] mx-auto px-8 py-10">
+      <div className="max-w-[1280px] mx-auto px-4 py-6 md:px-8 md:py-10">
         <p className="text-on-surface-variant">Thema niet gevonden.</p>
         <NavLink to="/" className="text-sm text-primary font-semibold mt-4 inline-block">
           ← Terug naar overzicht
@@ -194,13 +189,14 @@ export default function ThemeDetail() {
   }
 
   const iconStyle = {
+
     positive: 'text-tertiary-container',
     neutral:  'text-orange-400',
     critical: 'text-error',
   }[theme.sentiment]
 
   return (
-    <div className="max-w-[1280px] mx-auto px-8 py-10">
+    <div className="max-w-[1280px] mx-auto px-4 py-6 md:px-8 md:py-10">
 
       {/* Back button */}
       <NavLink
@@ -214,15 +210,15 @@ export default function ThemeDetail() {
       </NavLink>
 
       {/* Hero header */}
-      <div className="flex flex-wrap items-center gap-6 mb-10">
+      <div className="flex flex-wrap items-center gap-4 mb-6 md:gap-6 md:mb-10">
         <span
-          className={`material-symbols-outlined text-6xl ${iconStyle}`}
+          className={`material-symbols-outlined text-4xl md:text-6xl ${iconStyle}`}
           style={{ fontVariationSettings: "'FILL' 1" }}
         >
           {theme.icon}
         </span>
         <div className="flex-1 min-w-0">
-          <h1 className="text-4xl font-bold font-headline text-primary leading-tight">{theme.name}</h1>
+          <h1 className="text-2xl md:text-4xl font-bold font-headline text-primary leading-tight">{theme.name}</h1>
           <div className="flex items-center gap-3 mt-2 flex-wrap">
             <span className={`text-xs font-bold px-3 py-1 rounded-full ${BADGE[theme.sentiment]}`}>
               {BADGE_LABEL[theme.sentiment]}
@@ -238,13 +234,13 @@ export default function ThemeDetail() {
       </div>
 
       {/* Two-column grid */}
-      <div className="grid grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-6">
 
         {/* LEFT COLUMN */}
-        <div className="col-span-8 space-y-6">
+        <div className="md:col-span-8 space-y-6">
 
           {/* AI Samenvatting */}
-          <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-ambient border border-outline-variant/10">
+          <div className="bg-surface-container-lowest rounded-2xl p-4 md:p-6 shadow-ambient border border-outline-variant/10">
             <div className="flex items-center gap-2 mb-3">
               <span
                 className="material-symbols-outlined text-base text-secondary"
@@ -263,9 +259,9 @@ export default function ThemeDetail() {
           <TrendChart activeTheme={theme} allThemes={allThemes} />
 
           {/* Per opleiding vergelijking */}
-          <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-ambient border border-outline-variant/10">
+          <div className="bg-surface-container-lowest rounded-2xl p-4 md:p-6 shadow-ambient border border-outline-variant/10">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-bold font-headline text-primary">Per opleiding vergelijking</h2>
+              <h2 className="text-base md:text-lg font-bold font-headline text-primary">Per opleiding vergelijking</h2>
               <span className="material-symbols-outlined text-outline text-xl">school</span>
             </div>
             <OpleidingBars themeId={theme.id} />
@@ -286,9 +282,9 @@ export default function ThemeDetail() {
           </div>
 
           {/* Commentaar sectie */}
-          <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-ambient border border-outline-variant/10">
+          <div className="bg-surface-container-lowest rounded-2xl p-4 md:p-6 shadow-ambient border border-outline-variant/10">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-bold font-headline text-primary">Commentaar</h2>
+              <h2 className="text-base md:text-lg font-bold font-headline text-primary">Commentaar</h2>
               <span className="material-symbols-outlined text-outline text-xl">format_quote</span>
             </div>
             <div className="space-y-4">
@@ -308,18 +304,19 @@ export default function ThemeDetail() {
         </div>
 
         {/* RIGHT COLUMN — sticky */}
-        <div className="col-span-4">
-          <div className="sticky top-20 space-y-5">
+        <div className="md:col-span-4">
+          <div className="md:sticky md:top-20 space-y-5">
 
             {/* Sentiment donut */}
-            <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-ambient border border-outline-variant/10">
+            <div className="bg-surface-container-lowest rounded-2xl p-4 md:p-6 shadow-ambient border border-outline-variant/10">
               <h2 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-4">
                 Sentiment Score
               </h2>
-              <div className="flex flex-col items-center gap-3 mb-4">
+              <div className="flex flex-col items-center gap-2 mb-4">
                 <DonutChart breakdown={theme.sentimentBreakdown} score={theme.sentimentScore} />
+                <p className="text-3xl font-extrabold font-headline text-primary">{theme.sentimentScore}%</p>
                 <div className="text-center">
-                  <p className="text-lg font-bold text-on-surface">{theme.sentimentLabel}</p>
+                  <p className="text-base font-bold text-on-surface">{theme.sentimentLabel}</p>
                   <p className="text-xs text-on-surface-variant">Sentiment index</p>
                 </div>
               </div>
@@ -345,7 +342,7 @@ export default function ThemeDetail() {
             </div>
 
             {/* Sub-thema's */}
-            <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-ambient border border-outline-variant/10">
+            <div className="bg-surface-container-lowest rounded-2xl p-4 md:p-6 shadow-ambient border border-outline-variant/10">
               <h2 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-4">
                 Sub-thema's
               </h2>
@@ -354,7 +351,7 @@ export default function ThemeDetail() {
 
             {/* Gerelateerde thema's */}
             {relatedThemes.length > 0 && (
-              <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-ambient border border-outline-variant/10">
+              <div className="bg-surface-container-lowest rounded-2xl p-4 md:p-6 shadow-ambient border border-outline-variant/10">
                 <h2 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-4">
                   Gerelateerde thema's
                 </h2>
