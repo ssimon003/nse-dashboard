@@ -87,7 +87,7 @@ export default function DetailDrawer({ theme, onClose }) {
               className="text-[10px] font-bold px-2 py-1 rounded"
               style={{ background: SENTIMENT_COLOR[theme.sentiment] }}
             >
-              ACTIEF
+              ACTIVE
             </span>
             {onClose && (
               <button onClick={onClose} className="p-1 rounded hover:bg-white/10 transition-colors">
@@ -120,7 +120,7 @@ export default function DetailDrawer({ theme, onClose }) {
               auto_awesome
             </span>
             <h4 className="text-xs font-bold uppercase tracking-wider text-secondary">
-              AI Samenvatting
+              AI Summary
             </h4>
           </div>
           <p className="text-sm text-on-surface-variant leading-relaxed">{theme.aiSummary}</p>
@@ -130,15 +130,15 @@ export default function DetailDrawer({ theme, onClose }) {
         <div className="flex items-center gap-3 bg-surface-container-low rounded-xl p-3">
           <span className="material-symbols-outlined text-outline text-sm">bar_chart</span>
           <span className="text-sm font-semibold text-on-surface">
-            Vermeld in{' '}
-            <span className="text-primary font-bold">{theme.percentage}%</span> van de reacties
+            Mentioned in{' '}
+            <span className="text-primary font-bold">{theme.percentage}%</span> of responses
           </span>
         </div>
 
         {/* Sentiment breakdown bar */}
         <div>
           <h4 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">
-            Sentimentverdeling
+            Sentiment Distribution
           </h4>
           <div className="flex rounded-full overflow-hidden h-2 gap-px">
             <div
@@ -155,16 +155,16 @@ export default function DetailDrawer({ theme, onClose }) {
             />
           </div>
           <div className="flex justify-between text-[10px] text-on-surface-variant mt-1">
-            <span>Positief {theme.sentimentBreakdown.positive}%</span>
-            <span>Neutraal {theme.sentimentBreakdown.neutral}%</span>
-            <span>Kritisch {theme.sentimentBreakdown.negative}%</span>
+            <span>Positive {theme.sentimentBreakdown.positive}%</span>
+            <span>Neutral {theme.sentimentBreakdown.neutral}%</span>
+            <span>Critical {theme.sentimentBreakdown.negative}%</span>
           </div>
         </div>
 
         {/* Sub-themes */}
         <div>
           <h4 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">
-            Sub-thema's
+            Sub-themes
           </h4>
           <div className="flex flex-wrap gap-2">
             {theme.subthemes.map((st) => (
@@ -181,7 +181,7 @@ export default function DetailDrawer({ theme, onClose }) {
         {/* Quotes */}
         <div className="space-y-3 pt-2 border-t border-outline-variant/10">
           <h4 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
-            Voorbeeld Commentaar
+            Example Comments
           </h4>
           {theme.quotes.map((q, i) => (
             <blockquote
@@ -192,16 +192,17 @@ export default function DetailDrawer({ theme, onClose }) {
             </blockquote>
           ))}
           <p className="text-[10px] text-on-surface-variant/50 italic">
-            * Illustratieve voorbeelden, geen individuele studentrecords.
+            * Illustrative examples, not individual student records.
           </p>
         </div>
 
         {/* Full analysis link */}
         <Link
           to={`/thema/${theme.id}`}
+          onClick={() => window.scrollTo(0, 0)}
           className="border border-primary text-primary rounded-xl px-4 py-2 text-sm font-semibold w-full text-center block hover:bg-primary hover:text-white transition-colors"
         >
-          Bekijk volledige analyse →
+          View full analysis →
         </Link>
       </div>
     </div>

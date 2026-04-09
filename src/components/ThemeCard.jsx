@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const SENTIMENT_STYLES = {
   positive: {
@@ -28,11 +29,16 @@ export default function ThemeCard({ theme, isActive, onClick, size }) {
     ? 'ring-2 ring-primary scale-[1.02] shadow-ambient'
     : 'hover:scale-[1.02] hover:shadow-ambient'
 
+  const transition = { type: 'spring', stiffness: 300, damping: 30 }
+
   if (size === 'large') {
     return (
-      <div
+      <motion.div
+        layout
+        layoutId={theme.id}
+        transition={transition}
         onClick={onClick}
-        className={`col-span-2 md:row-span-2 ${styles.bg} rounded-xl p-4 md:p-6 flex flex-col justify-between cursor-pointer transition-all duration-200 ${activeCls} border ${styles.border} min-h-[140px] md:min-h-0`}
+        className={`col-span-2 md:row-span-2 ${styles.bg} rounded-xl p-4 md:p-6 flex flex-col justify-between cursor-pointer ${activeCls} border ${styles.border} min-h-[140px] md:min-h-0`}
       >
         <div className="flex justify-between items-start">
           <span
@@ -52,21 +58,24 @@ export default function ThemeCard({ theme, isActive, onClick, size }) {
           )}
           <Link
             to={`/thema/${theme.id}`}
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => { e.stopPropagation(); window.scrollTo(0, 0) }}
             className="text-xs font-semibold text-primary/70 hover:text-primary mt-2 inline-block"
           >
-            Bekijk meer →
+            View more →
           </Link>
         </div>
-      </div>
+      </motion.div>
     )
   }
 
   if (size === 'medium') {
     return (
-      <div
+      <motion.div
+        layout
+        layoutId={theme.id}
+        transition={transition}
         onClick={onClick}
-        className={`col-span-2 ${styles.bg} rounded-xl p-4 md:p-5 flex flex-col justify-between cursor-pointer transition-all duration-200 ${activeCls} border ${styles.border}`}
+        className={`col-span-2 ${styles.bg} rounded-xl p-4 md:p-5 flex flex-col justify-between cursor-pointer ${activeCls} border ${styles.border}`}
       >
         <div className="flex justify-between items-start">
           <span className={`material-symbols-outlined text-2xl ${styles.icon}`}>{theme.icon}</span>
@@ -75,20 +84,23 @@ export default function ThemeCard({ theme, isActive, onClick, size }) {
         <h3 className="text-base md:text-lg font-bold font-headline text-primary mt-2">{theme.name}</h3>
         <Link
           to={`/thema/${theme.id}`}
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e) => { e.stopPropagation(); window.scrollTo(0, 0) }}
           className="text-xs font-semibold text-primary/70 hover:text-primary mt-1 inline-block"
         >
-          Bekijk meer →
+          View more →
         </Link>
-      </div>
+      </motion.div>
     )
   }
 
   // small
   return (
-    <div
+    <motion.div
+      layout
+      layoutId={theme.id}
+      transition={transition}
       onClick={onClick}
-      className={`${styles.bg} rounded-xl p-3 md:p-4 flex flex-col justify-between cursor-pointer transition-all duration-200 ${activeCls} border ${styles.border}`}
+      className={`${styles.bg} rounded-xl p-3 md:p-4 flex flex-col justify-between cursor-pointer ${activeCls} border ${styles.border}`}
     >
       <div className="flex justify-between items-start">
         <span className={`material-symbols-outlined text-xl ${styles.icon}`}>{theme.icon}</span>
@@ -102,11 +114,11 @@ export default function ThemeCard({ theme, isActive, onClick, size }) {
       )}
       <Link
         to={`/thema/${theme.id}`}
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => { e.stopPropagation(); window.scrollTo(0, 0) }}
         className="text-[10px] font-semibold text-primary/70 hover:text-primary mt-1 inline-block"
       >
-        Bekijk meer →
+        View more →
       </Link>
-    </div>
+    </motion.div>
   )
 }

@@ -49,7 +49,7 @@ export default function TrendChart({ activeTheme, allThemes }) {
   return (
     <div className="bg-surface-container-low rounded-xl p-4 md:p-6 flex flex-col gap-4">
       <div className="flex justify-between items-center">
-        <h3 className="text-base md:text-lg font-bold font-headline text-primary">Trend Analyse</h3>
+        <h3 className="text-base md:text-lg font-bold font-headline text-primary">Trend Analysis</h3>
         <span className="material-symbols-outlined text-outline text-xl">trending_up</span>
       </div>
 
@@ -156,11 +156,11 @@ export default function TrendChart({ activeTheme, allThemes }) {
 
       {activeTheme && (
         <p className="text-xs text-on-surface-variant italic">
-          Thema '{activeTheme.name}' toont een groei van{' '}
+          Theme '{activeTheme.name}' shows a growth of{' '}
           <span className="font-semibold text-primary">
             +{activeTheme.trend[activeTheme.trend.length - 1] - activeTheme.trend[0]}%
           </span>{' '}
-          over de gemeten jaren.
+          over the measured years.
         </p>
       )}
     </div>

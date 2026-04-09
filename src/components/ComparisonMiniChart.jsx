@@ -1,23 +1,23 @@
 export default function ComparisonMiniChart({ theme, filters }) {
   if (!theme) return null
 
-  const activeSv = filters?.studievorm ?? 'Alle'
+  const activeSv = filters?.studievorm ?? 'All'
 
   const bars = [
-    { key: 'voltijd', label: 'Voltijd',  value: theme.comparison.voltijd,  color: '#006a6a' },
-    { key: 'deeltijd', label: 'Deeltijd', value: theme.comparison.deeltijd, color: '#90efef' },
-    { key: 'duaal',   label: 'Duaal',    value: theme.comparison.duaal,    color: '#c2c6d1' },
+    { key: 'voltijd', label: 'Full-time',  value: theme.comparison.voltijd,  color: '#006a6a' },
+    { key: 'deeltijd', label: 'Part-time', value: theme.comparison.deeltijd, color: '#90efef' },
+    { key: 'duaal',   label: 'Dual',       value: theme.comparison.duaal,    color: '#c2c6d1' },
   ]
 
   return (
     <div className="bg-surface-container-low rounded-xl p-4 md:p-6 flex flex-col gap-4">
       <div className="flex justify-between items-center">
-        <h3 className="text-base md:text-lg font-bold font-headline text-primary">Studievorm</h3>
+        <h3 className="text-base md:text-lg font-bold font-headline text-primary">Study Mode</h3>
         <span className="material-symbols-outlined text-outline text-xl">compare_arrows</span>
       </div>
       <div className="flex flex-col gap-3">
         {bars.map((bar) => {
-          const isActive = activeSv === bar.label || activeSv === 'Alle'
+          const isActive = activeSv === bar.label || activeSv === 'All'
           return (
             <div key={bar.key} className="flex flex-col gap-1" style={{ opacity: isActive ? 1 : 0.4 }}>
               <div className="flex justify-between">
@@ -25,7 +25,7 @@ export default function ComparisonMiniChart({ theme, filters }) {
                   {bar.label}
                   {activeSv === bar.label && (
                     <span className="ml-1.5 text-[9px] uppercase tracking-wider bg-primary text-white px-1.5 py-0.5 rounded">
-                      actief
+                      active
                     </span>
                   )}
                 </span>
@@ -47,8 +47,8 @@ export default function ComparisonMiniChart({ theme, filters }) {
         })}
       </div>
       <p className="text-xs text-on-surface-variant mt-auto">
-        Positief sentiment voor{' '}
-        <span className="font-semibold text-primary">{theme.name}</span> per studievorm.
+        Positive sentiment for{' '}
+        <span className="font-semibold text-primary">{theme.name}</span> by study mode.
       </p>
     </div>
   )

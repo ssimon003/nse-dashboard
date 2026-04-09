@@ -77,13 +77,13 @@ export default function Vergelijken() {
       <aside className="w-full md:w-72 md:fixed md:right-0 md:top-16 md:h-[calc(100vh-4rem)] bg-surface-container-lowest/85 glass-panel shadow-editorial flex flex-col p-5 gap-4 order-first md:order-last overflow-y-auto">
         <div>
           <h3 className="text-xs font-bold uppercase tracking-widest text-primary mb-1">Filters</h3>
-          <p className="text-xs text-on-surface-variant">Verfijn uw inzichten</p>
+          <p className="text-xs text-on-surface-variant">Refine your insights</p>
         </div>
         {[
-          { icon: 'calendar_today', label: 'Academisch Jaar' },
-          { icon: 'location_on', label: 'Locatie' },
-          { icon: 'school', label: 'Opleiding' },
-          { icon: 'history_edu', label: 'Studievorm' },
+          { icon: 'calendar_today', label: 'Academic Year' },
+          { icon: 'location_on', label: 'Location' },
+          { icon: 'school', label: 'Programme' },
+          { icon: 'history_edu', label: 'Study Mode' },
           { icon: 'group', label: 'Cohort' },
         ].map((f, i) => (
           <button
@@ -101,12 +101,12 @@ export default function Vergelijken() {
 
         <div className="mt-auto bg-surface-container-low p-4 rounded-xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-on-surface-variant uppercase">Data Bron</span>
+            <span className="text-xs font-bold text-on-surface-variant uppercase">Data Source</span>
             <span className="material-symbols-outlined text-sm text-outline">info</span>
           </div>
           <p className="text-[10px] text-on-surface-variant leading-relaxed">
-            De resultaten zijn gebaseerd op de Nationale Studenten Enquête (NSE) resultaten van
-            Fontys Hogescholen.
+            Results are based on the National Student Survey (NSE) results from
+            Fontys University of Applied Sciences.
           </p>
         </div>
       </aside>
@@ -116,11 +116,11 @@ export default function Vergelijken() {
         {/* Header */}
         <div className="mb-8 md:mb-16">
           <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight font-headline text-primary mb-2">
-            Vergelijkende Analyse
+            Comparative Analysis
           </h1>
           <p className="text-on-surface-variant max-w-2xl font-body">
-            Directe vergelijking van studenttevredenheid tussen twee opleidingen op basis van de
-            belangrijkste NSE thema's.
+            Direct comparison of student satisfaction between two programmes based on the
+            key NSE themes.
           </p>
         </div>
 
@@ -128,7 +128,7 @@ export default function Vergelijken() {
         <div className="grid grid-cols-1 md:grid-cols-11 gap-3 md:gap-4 mb-8 md:mb-12 items-center">
           <div className="md:col-span-5 bg-surface-container-lowest p-5 rounded-xl shadow-editorial">
             <label className="text-[10px] uppercase font-bold text-secondary mb-2 block">
-              Selectie A
+              Selection A
             </label>
             <select
               value={selA}
@@ -155,7 +155,7 @@ export default function Vergelijken() {
 
           <div className="md:col-span-5 md:text-right bg-surface-container-lowest p-5 rounded-xl shadow-editorial">
             <label className="text-[10px] uppercase font-bold text-secondary mb-2 block">
-              Selectie B
+              Selection B
             </label>
             <select
               value={selB}
@@ -179,13 +179,13 @@ export default function Vergelijken() {
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded-full bg-primary" />
               <span className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
-                Tevredenheidsscore (1-5)
+                Satisfaction Score (1-5)
               </span>
             </div>
-            <span className="text-sm font-headline font-bold text-primary">Top NSE Thema's</span>
+            <span className="text-sm font-headline font-bold text-primary">Top NSE Themes</span>
             <div className="flex items-center gap-2">
               <span className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
-                Tevredenheidsscore (1-5)
+                Satisfaction Score (1-5)
               </span>
               <span className="w-3 h-3 rounded-full bg-secondary" />
             </div>
@@ -204,9 +204,9 @@ export default function Vergelijken() {
 
           {/* Footer */}
           <div className="mt-8 flex justify-between text-[10px] font-medium text-on-surface-variant/50 uppercase tracking-widest border-t border-outline-variant/10 pt-4">
-            <span>n={progA?.respondents} respondenten</span>
-            <span>Gemeten op 12 mei 2025</span>
-            <span>n={progB?.respondents} respondenten</span>
+            <span>n={progA?.respondents} respondents</span>
+            <span>Measured on 12 May 2025</span>
+            <span>n={progB?.respondents} respondents</span>
           </div>
         </div>
 
@@ -215,16 +215,16 @@ export default function Vergelijken() {
           <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-editorial">
             <div className="flex items-center gap-3 mb-4">
               <span className="material-symbols-outlined text-tertiary-container">trending_up</span>
-              <h3 className="font-headline font-bold text-lg text-primary">Belangrijkste Verschil</h3>
+              <h3 className="font-headline font-bold text-lg text-primary">Biggest Difference</h3>
             </div>
             <p className="text-sm text-on-surface-variant leading-relaxed mb-4">
-              Het meest significante verschil is zichtbaar bij{' '}
-              <strong>{COMPARISON_LABELS[biggestDiffKey]}</strong>. {progA?.name} scoort{' '}
+              The most significant difference is visible in{' '}
+              <strong>{COMPARISON_LABELS[biggestDiffKey]}</strong>. {progA?.name} scores{' '}
               <strong>{dataA[biggestDiffKey].toFixed(1)}</strong> versus{' '}
-              <strong>{dataB[biggestDiffKey].toFixed(1)}</strong> bij {progB?.name}.
+              <strong>{dataB[biggestDiffKey].toFixed(1)}</strong> for {progB?.name}.
             </p>
             <div className="flex items-center gap-2 text-xs font-bold text-primary cursor-pointer hover:underline">
-              <span>BEKIJK GEDETAILLEERDE RAPPORTAGE</span>
+              <span>VIEW DETAILED REPORT</span>
               <span className="material-symbols-outlined text-xs">arrow_forward</span>
             </div>
           </div>
@@ -234,14 +234,14 @@ export default function Vergelijken() {
             style={{ background: 'linear-gradient(135deg, #002F59 0%, #00467F 100%)' }}
           >
             <div className="relative z-10">
-              <h3 className="font-headline font-bold text-lg mb-3">Actiepunt</h3>
+              <h3 className="font-headline font-bold text-lg mb-3">Action Point</h3>
               <p className="text-sm text-blue-100/80 leading-relaxed mb-5">
-                Beide opleidingen scoren relatief laag op{' '}
-                <strong>Begeleiding</strong>. Dit biedt een kans voor gecentraliseerde verbetering
-                van het mentoraat-programma binnen de Fontys ICT instelling.
+                Both programmes score relatively low on{' '}
+                <strong>Guidance</strong>. This presents an opportunity for centralised improvement
+                of the mentoring programme within the Fontys ICT institution.
               </p>
               <button className="bg-white text-primary px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wide hover:bg-surface-container-low transition-colors">
-                Deel Inzicht
+                Share Insight
               </button>
             </div>
             <span
@@ -254,7 +254,7 @@ export default function Vergelijken() {
         </div>
 
         <footer className="mt-16 text-center text-xs text-on-surface-variant opacity-40">
-          © 2025 Fontys Hogescholen - NSE Inzichten Dashboard. Alle rechten voorbehouden.
+          © 2025 Fontys University of Applied Sciences - NSE Insights Dashboard. All rights reserved.
         </footer>
       </section>
       </div>

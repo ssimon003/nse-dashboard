@@ -52,9 +52,9 @@ const BADGE = {
   critical: 'bg-error-container text-on-error-container',
 }
 const BADGE_LABEL = {
-  positive: 'Positief',
-  neutral:  'Neutraal',
-  critical: 'Kritisch',
+  positive: 'Positive',
+  neutral:  'Neutral',
+  critical: 'Critical',
 }
 
 // ── Bar colour by score threshold ────────────────────────────────────────────
@@ -148,7 +148,7 @@ function RelatedThemeCard({ theme }) {
       </span>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-bold text-primary truncate">{theme.name}</p>
-        <p className="text-[10px] text-on-surface-variant">{theme.percentage}% van reacties</p>
+        <p className="text-[10px] text-on-surface-variant">{theme.percentage}% of responses</p>
       </div>
       <span className="text-xs text-on-surface-variant">→</span>
     </Link>
@@ -162,8 +162,8 @@ export default function ThemeDetail() {
 
   const defaultFilters = {
     opleiding: 'Software Engineering',
-    studievorm: 'Alle',
-    locatie: 'Alle locaties',
+    studievorm: 'All',
+    locatie: 'All locations',
   }
 
   const allThemes = useMemo(() => getFilteredThemes(defaultFilters), [])
@@ -180,9 +180,9 @@ export default function ThemeDetail() {
   if (!theme) {
     return (
       <div className="max-w-[1280px] mx-auto px-4 py-6 md:px-8 md:py-10">
-        <p className="text-on-surface-variant">Thema niet gevonden.</p>
+        <p className="text-on-surface-variant">Theme not found.</p>
         <NavLink to="/" className="text-sm text-primary font-semibold mt-4 inline-block">
-          ← Terug naar overzicht
+          ← Back to overview
         </NavLink>
       </div>
     )
@@ -206,7 +206,7 @@ export default function ThemeDetail() {
         <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>
           arrow_back
         </span>
-        Terug naar overzicht
+        Back to overview
       </NavLink>
 
       {/* Hero header */}
@@ -224,7 +224,7 @@ export default function ThemeDetail() {
               {BADGE_LABEL[theme.sentiment]}
             </span>
             <span className="text-sm text-on-surface-variant">
-              Vermeld in <span className="font-bold text-primary">{theme.percentage}%</span> van de reacties
+              Mentioned in <span className="font-bold text-primary">{theme.percentage}%</span> of responses
             </span>
             {theme.subtag && (
               <span className="text-xs text-on-surface-variant/70 italic">{theme.subtag}</span>
@@ -249,7 +249,7 @@ export default function ThemeDetail() {
                 auto_awesome
               </span>
               <h2 className="text-xs font-bold uppercase tracking-wider text-secondary">
-                AI Samenvatting
+                AI Summary
               </h2>
             </div>
             <p className="text-base text-on-surface leading-relaxed">{theme.aiSummary}</p>
@@ -261,22 +261,22 @@ export default function ThemeDetail() {
           {/* Per opleiding vergelijking */}
           <div className="bg-surface-container-lowest rounded-2xl p-4 md:p-6 shadow-ambient border border-outline-variant/10">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-base md:text-lg font-bold font-headline text-primary">Per opleiding vergelijking</h2>
+              <h2 className="text-base md:text-lg font-bold font-headline text-primary">Comparison by Programme</h2>
               <span className="material-symbols-outlined text-outline text-xl">school</span>
             </div>
             <OpleidingBars themeId={theme.id} />
             <div className="flex gap-4 mt-4 pt-3 border-t border-outline-variant/10">
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-2 rounded-sm inline-block" style={{ background: '#005119' }} />
-                <span className="text-[10px] text-on-surface-variant">Positief (≥65%)</span>
+                <span className="text-[10px] text-on-surface-variant">Positive (≥65%)</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-2 rounded-sm inline-block" style={{ background: '#b45309' }} />
-                <span className="text-[10px] text-on-surface-variant">Neutraal (38–64%)</span>
+                <span className="text-[10px] text-on-surface-variant">Neutral (38–64%)</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-2 rounded-sm inline-block" style={{ background: '#ba1a1a' }} />
-                <span className="text-[10px] text-on-surface-variant">Kritisch (&lt;38%)</span>
+                <span className="text-[10px] text-on-surface-variant">Critical (&lt;38%)</span>
               </div>
             </div>
           </div>
@@ -284,7 +284,7 @@ export default function ThemeDetail() {
           {/* Commentaar sectie */}
           <div className="bg-surface-container-lowest rounded-2xl p-4 md:p-6 shadow-ambient border border-outline-variant/10">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-base md:text-lg font-bold font-headline text-primary">Commentaar</h2>
+              <h2 className="text-base md:text-lg font-bold font-headline text-primary">Comments</h2>
               <span className="material-symbols-outlined text-outline text-xl">format_quote</span>
             </div>
             <div className="space-y-4">
@@ -298,7 +298,7 @@ export default function ThemeDetail() {
               ))}
             </div>
             <p className="text-[10px] text-on-surface-variant/50 italic mt-4">
-              Illustratieve voorbeelden, geen individuele studentrecords.
+              Illustrative examples, not individual student records.
             </p>
           </div>
         </div>
@@ -312,12 +312,14 @@ export default function ThemeDetail() {
               <h2 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-4">
                 Sentiment Score
               </h2>
+
               <div className="flex flex-col items-center gap-2 mb-4">
                 <DonutChart breakdown={theme.sentimentBreakdown} score={theme.sentimentScore} />
                 <p className="text-3xl font-extrabold font-headline text-primary">{theme.sentimentScore}%</p>
                 <div className="text-center">
                   <p className="text-base font-bold text-on-surface">{theme.sentimentLabel}</p>
                   <p className="text-xs text-on-surface-variant">Sentiment index</p>
+
                 </div>
               </div>
               <div className="flex rounded-full overflow-hidden h-2 gap-px">
@@ -335,16 +337,16 @@ export default function ThemeDetail() {
                 />
               </div>
               <div className="flex justify-between text-[10px] text-on-surface-variant mt-1.5">
-                <span>Positief {theme.sentimentBreakdown.positive}%</span>
-                <span>Neutraal {theme.sentimentBreakdown.neutral}%</span>
-                <span>Kritisch {theme.sentimentBreakdown.negative}%</span>
+                <span>Positive {theme.sentimentBreakdown.positive}%</span>
+                <span>Neutral {theme.sentimentBreakdown.neutral}%</span>
+                <span>Critical {theme.sentimentBreakdown.negative}%</span>
               </div>
             </div>
 
             {/* Sub-thema's */}
             <div className="bg-surface-container-lowest rounded-2xl p-4 md:p-6 shadow-ambient border border-outline-variant/10">
               <h2 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-4">
-                Sub-thema's
+                Sub-themes
               </h2>
               <SubThemeBars subthemes={theme.subthemes} />
             </div>
@@ -353,7 +355,7 @@ export default function ThemeDetail() {
             {relatedThemes.length > 0 && (
               <div className="bg-surface-container-lowest rounded-2xl p-4 md:p-6 shadow-ambient border border-outline-variant/10">
                 <h2 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-4">
-                  Gerelateerde thema's
+                  Related themes
                 </h2>
                 <div className="space-y-2">
                   {relatedThemes.map((t) => (
