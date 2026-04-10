@@ -27,9 +27,10 @@ function buildArea(data, maxVal) {
 
 export default function TrendChart({ activeTheme, allThemes }) {
   const topThemes = useMemo(() => {
-    const sorted = [...allThemes].sort((a, b) => b.percentage - a.percentage).slice(0, 5)
-    // ensure active theme is included
-    if (activeTheme && !sorted.find((t) => t.id === activeTheme.id)) {
+    // Only include themes that have valid trend arrays
+    const withTrend = allThemes.filter((t) => Array.isArray(t.trend) && t.trend.length > 1)
+    const sorted = [...withTrend].sort((a, b) => b.percentage - a.percentage).slice(0, 5)
+    if (activeTheme && Array.isArray(activeTheme.trend) && !sorted.find((t) => t.id === activeTheme.id)) {
       sorted.pop()
       sorted.push(activeTheme)
     }
@@ -37,7 +38,7 @@ export default function TrendChart({ activeTheme, allThemes }) {
   }, [allThemes, activeTheme])
 
   const maxVal = useMemo(
-    () => Math.max(...topThemes.flatMap((t) => t.trend)) + 2,
+    () => topThemes.length > 0 ? Math.max(...topThemes.flatMap((t) => t.trend)) + 2 : 20,
     [topThemes]
   )
 

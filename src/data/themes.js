@@ -17,7 +17,7 @@ export const FILTER_OPTIONS = {
 }
 
 // Base theme definitions (shared across all profiles)
-const BASE_THEMES = [
+export const BASE_THEMES = [
   {
     id: 'begeleiding',
     name: 'Guidance',
@@ -119,7 +119,7 @@ const BASE_THEMES = [
 ]
 
 // ── Per-programme AI summaries ────────────────────────────────────────────────
-const AI_SUMMARIES = {
+export const AI_SUMMARIES = {
   begeleiding: {
     'Software Engineering':   'Software Engineering students value hands-on mentoring during technical projects. Lecturers are praised for their practical industry knowledge and responsiveness to questions during crunch periods.',
     'Cyber Security':         'Cyber Security students note steady improvement in lecturer availability. Peer mentoring in lab environments is positively received, though formal guidance sessions can be inconsistent in frequency.',
@@ -179,7 +179,7 @@ const AI_SUMMARIES = {
 }
 
 // ── Per-programme student quotes ──────────────────────────────────────────────
-const QUOTES = {
+export const QUOTES = {
   begeleiding: {
     'Software Engineering': [
       '"My mentor scheduled regular one-on-ones and tracked my progress across each sprint. It made a real difference during crunch time."',

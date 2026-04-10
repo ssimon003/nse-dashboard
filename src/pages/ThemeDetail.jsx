@@ -1,6 +1,7 @@
-import { useMemo } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { useParams, NavLink, Link, useNavigate } from 'react-router-dom'
-import { getFilteredThemes, FILTER_OPTIONS, OPLEIDING_PROFILES } from '../data/themes'
+import { FILTER_OPTIONS, OPLEIDING_PROFILES, BASE_THEMES } from '../data/themes'
+import { getThemesFromAPI } from '../data/api'
 import TrendChart from '../components/TrendChart'
 
 // ── Donut chart (inlined, larger than the drawer version) ──────────────────
@@ -164,9 +165,16 @@ export default function ThemeDetail() {
     opleiding: 'Software Engineering',
     studievorm: 'All',
     locatie: 'All locations',
+    jaar: '2025/2026',
+    cohort: 'All',
   }
 
-  const allThemes = useMemo(() => getFilteredThemes(defaultFilters), [])
+  const [allThemes, setAllThemes] = useState([])
+
+  useEffect(() => {
+    getThemesFromAPI(defaultFilters).then(setAllThemes)
+  }, [])
+
   const theme = useMemo(() => allThemes.find((t) => t.id === id), [allThemes, id])
 
   const relatedThemes = useMemo(() => {

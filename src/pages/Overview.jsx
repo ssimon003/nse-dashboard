@@ -1,5 +1,6 @@
-import { useState, useMemo } from 'react'
-import { getFilteredThemes, FILTER_OPTIONS } from '../data/themes'
+import { useState, useMemo, useEffect } from 'react'
+import { FILTER_OPTIONS } from '../data/themes'
+import { getThemesFromAPI } from '../data/api'
 import ThemeCard from '../components/ThemeCard'
 import DetailDrawer from '../components/DetailDrawer'
 import TrendChart from '../components/TrendChart'
@@ -16,7 +17,20 @@ export default function Overview() {
     cohort:     'All',
   })
 
-  const themes = useMemo(() => getFilteredThemes(filters), [filters])
+  const [themes, setThemes] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    let active = true;
+    setIsLoading(true);
+    getThemesFromAPI(filters).then(data => {
+      if (active) {
+        setThemes(data);
+        setIsLoading(false);
+      }
+    });
+    return () => { active = false; };
+  }, [filters])
 
   // Sort by percentage and assign sizes dynamically so layout reflects frequency
   const bentoThemes = useMemo(() => {
@@ -125,7 +139,12 @@ export default function Overview() {
             </div>
 
             <LayoutGroup>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:grid-rows-3 md:h-[460px]">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:grid-rows-3 md:h-[460px] relative">
+                {isLoading && (
+                  <div className="absolute inset-0 z-10 flex items-center justify-center bg-surface-container-lowest/50 rounded-2xl backdrop-blur-sm">
+                    <span className="material-symbols-outlined animate-spin text-4xl text-primary">sync</span>
+                  </div>
+                )}
                 {bentoThemes.map((theme) => (
                   <ThemeCard
                     key={theme.id}
